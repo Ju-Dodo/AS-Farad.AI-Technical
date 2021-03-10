@@ -6,7 +6,7 @@ import DistanceTo
 
 if __name__=='__main__':
     # open the connection to Google Cloud database
-    sqlurl, sslrootcert, sslcert, sslkey = PSQLConnect.initConn("Config_Files/config.ini")
+    sqlurl, sslrootcert, sslcert, sslkey = PSQLConnect.initConn("Templates/config.ini")
     engine = sqlalchemy.create_engine(sqlurl, connect_args={'sslrootcert':sslrootcert,'sslcert':sslcert,'sslkey':sslkey})
     conn = engine.connect()
 
