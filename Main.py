@@ -1,12 +1,12 @@
 import geopandas as gpd
 import sqlalchemy
-import PSQLConnect
-import DistanceTo
+from PSQLConnect import initConn
+from DistanceTo import DistanceTo
 
 
 if __name__=='__main__':
     # open the connection to Google Cloud database
-    sqlurl, sslrootcert, sslcert, sslkey = PSQLConnect.initConn("Templates/config.ini")
+    sqlurl, sslrootcert, sslcert, sslkey = initConn("Templates/config.ini")
     engine = sqlalchemy.create_engine(sqlurl, connect_args={'sslrootcert':sslrootcert,'sslcert':sslcert,'sslkey':sslkey})
     conn = engine.connect()
 
@@ -18,8 +18,8 @@ if __name__=='__main__':
 
     # Create sub-dataframes to include only entries that meet the given criteria
     Addenbrookes_coords = (0.1407, 52.1751)
-    subdf_lr = DistanceTo.DistanceTo(df_lr, Addenbrookes_coords, geom_col='wkb_geometry', min_dist=200, max_dist=1000, min_area=2000)
-    subdf_hv = DistanceTo.DistanceTo(df_hv, Addenbrookes_coords, geom_col='geom', max_dist=2000)
+    subdf_lr = DistanceTo(df_lr, Addenbrookes_coords, geom_col='wkb_geometry', min_dist=200, max_dist=1000, min_area=2000)
+    subdf_hv = DistanceTo(df_hv, Addenbrookes_coords, geom_col='geom', max_dist=2000)
 
 
     # Add a new column to the land registry sub-dataframe that includes the distance to the nearest substation
