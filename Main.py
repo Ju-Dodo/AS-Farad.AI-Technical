@@ -23,7 +23,7 @@ if __name__=='__main__':
 
 
     # Add a new column to the land registry sub-dataframe that includes the distance to the nearest substation
-    nearest_substation = subdf_lr.wkb_geometry.to_crs('epsg:27700').apply(lambda row: subdf_hv.geom.to_crs('epsg:27700').distance(row)).min(axis=1).copy()
+    nearest_substation = subdf_lr.wkb_geometry.to_crs('epsg:27700').apply(lambda row: subdf_hv.geom.to_crs('epsg:27700').distance(row)).min(axis=1)
     subdf_lr.loc[:,'Nearest_Substation']=nearest_substation
 
     # Sorts the new dataframe in ascending order of nearest substation
